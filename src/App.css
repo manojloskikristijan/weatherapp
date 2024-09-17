@@ -1,38 +1,195 @@
-.App {
+/* *{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.app{
+  min-height: 100vh;
+  background: #e2d4ff;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container{
+  display: grid;
+  place-items: center;    
+  height: 100vh;
+}
+ */
+
+/* General styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app {
   min-height: 100vh;
+  background: #e2d4ff;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 3% 0;
+}
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 1rem;
+  max-width: 100%;
+  height: 100%;
+  flex-grow: 1;
+}
+
+/* Card styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  box-shadow: 10px 10px 10px -1px rgba(10, 99, 169, 0.16),
+    0px 0px 10px -1px rgba(255, 255, 255, 0.7);
+  border: none;
+  color: black;
+  width: 100%;
+  min-width: 500px; /* Limits the card width */
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  height: 120px;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #5a67d8;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem;
+  border-radius: 100%;
+  background-color: orange;
   color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 8px 11px rgba(0, 0, 0, 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+.button:hover {
+  transform: scale(1.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Body styles */
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.body img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background-color: #e2e8f0;
+}
+
+.body h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.body p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Footer styles */
+.footer {
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #888;
+}
+
+.footer p {
+  font-size: 0.9rem;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+    width: 90%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .body h3 {
+    font-size: 1.6rem;
+  }
+
+  .body p {
+    font-size: 1rem;
+  }
+
+  .button {
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .header {
+    /* flex-direction: column;
+      gap: 0.5rem; */
+  }
+
+  .input {
+    padding: 0.5rem;
+  }
+
+  .body h3 {
+    font-size: 1.4rem;
+  }
+
+  .body p {
+    font-size: 0.9rem;
+  }
+
+  .footer p {
+    font-size: 0.8rem;
   }
 }

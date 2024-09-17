@@ -1,0 +1,11 @@
+h3{
+    color: black;
+    font-family: "Poppins", sans-serif;
+    /* font-weight: bold; */
+  font-style: normal;
+  margin-bottom: 2rem;
+}
+.word{
+  color: orange;
+  font-weight: bold;
+}
