@@ -47,7 +47,6 @@ function CustomCard() {
 
   // State to manage the visibility of the body and footer
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [inputError, setInputError] = useState(false);
 
@@ -74,7 +73,6 @@ function CustomCard() {
         await getWeather(inputValue.toLowerCase());
 
         setIsExpanded(true); // Re-expand after fetching data
-        setIsLoading(false); // End loading
       } catch (err) {
         setInputError(true);
         setErrorMessage(true);
