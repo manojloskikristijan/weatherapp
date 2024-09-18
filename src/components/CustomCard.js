@@ -146,20 +146,19 @@ function CustomCard() {
         </motion.span>
       </div>
 
-      {errorMessage && (
-        <motion.p
-          initial={{ y: -50, opacity: 0 }}
-          animate={{
-            // rotate: inputError ? [11, -11, 0] : null,
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{ type: "spting", damping: 20, stiffness: 540 }}
-          className="errorMessage"
-        >
-          City not found. Please try again.
-        </motion.p>
-      )}
+      <AnimatePresence>
+        {errorMessage && (
+          <motion.p
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", damping: 20, stiffness: 540 }}
+            exit={{ y: -50, opacity: 0 }} // This exit will now work
+            className="errorMessage"
+          >
+            City not found. Please try again.
+          </motion.p>
+        )}
+      </AnimatePresence>
 
       {/* Body and Footer: Initially hidden, shown on button click */}
       {isExpanded && (
