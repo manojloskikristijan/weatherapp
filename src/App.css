@@ -75,16 +75,21 @@
 .input {
   flex: 1;
   padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  /* border-radius: 8px; */
+  border: none;
+  border-bottom: 1px solid #ddd;
   background-color: #fff;
   color: #333;
   transition: border-color 0.2s ease-in-out;
 }
 
 .input:focus {
+  /* 
+  border-color: #5a67d8; */
   outline: none;
-  border-color: #5a67d8;
+  border: none;
+  border-bottom-color: #ddd;
+  /* border-bottom-color: #5a67d8; */
 }
 
 .button {

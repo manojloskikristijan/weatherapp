@@ -6,15 +6,10 @@ import { easeIn, motion } from "framer-motion";
 import { Cursor, useTypewriter, Typewriter } from "react-simple-typewriter";
 import { type } from "@testing-library/user-event/dist/type";
 
-const title = "Whhat's the weather today?";
+// const title = "Whhat's the weather today?";
+const title = "Your day could start ";
 
 function HeroTitle() {
-  const { text } = useTypewriter({
-    words: ["Developer", "Designer", "Enterpenuer"],
-    loop: {},
-    typeSpeed: 120,
-  });
-
   const [displayedText, setDisplayedText] = useState("");
 
   const titleVariants = {
@@ -34,16 +29,15 @@ function HeroTitle() {
   return (
     <>
       <h3>
-        The weather can be{" "}
+        {title}
         <span className="word">
           <Typewriter
+            // Bright, Windy, or even Stormy, but keep moving forward.
             words={[
-              "Sunny",
-              "Cloudy",
+              "Bright",
               "Windy",
-              "Rainy",
-              "but",
-              "you got to keep going",
+              "or even Stormy",
+              "but keep moving forward.",
             ]}
             typeSpeed={70}
             deleteSpeed={50}

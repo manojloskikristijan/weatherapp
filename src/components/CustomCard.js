@@ -6,6 +6,25 @@ import Air from "../icons/Air";
 import Humidity from "../icons/Humidity";
 
 function CustomCard() {
+  async function mockGetWeather(city) {
+    let response;
+    try {
+      response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3d23d427d40f99f66540165b8ef6734b`
+      );
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    return new Promise((resolve, reject) => {
+      if (response.ok) {
+        resolve({ ok: true });
+      } else {
+        resolve({ ok: false });
+      }
+    });
+  }
+
   async function getWeather(city) {
     try {
       const response = await fetch(
@@ -32,6 +51,8 @@ function CustomCard() {
   const [inputValue, setInputValue] = useState("");
   const [inputError, setInputError] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState(false);
+
   // WEATHER DATA
   const [iconUrl, setIconUrl] = useState("");
   const [city, setCity] = useState("");
@@ -44,26 +65,32 @@ function CustomCard() {
   const handleSearchClick = async () => {
     if (inputValue) {
       try {
-        setInputError(false);
-        setIsLoading(true); // Set loading state
-        setIsExpanded(false); // Trigger collapse
+        const response = await mockGetWeather(inputValue.toLowerCase());
 
-        await new Promise((resolve) => setTimeout(resolve, 300)); // Wait for collapse animation
+        if (response.ok) {
+          setIsExpanded(false); // Trigger collapse
+        }
+
         await getWeather(inputValue.toLowerCase());
 
         setIsExpanded(true); // Re-expand after fetching data
         setIsLoading(false); // End loading
       } catch (err) {
         setInputError(true);
-        console.log(err);
+        setErrorMessage(true);
       }
     } else {
       setInputError(true);
+      setTimeout(() => {
+        setInputError(false);
+      }, 100);
     }
   };
 
   const handleInputOnChange = (e) => {
     setInputValue(e.target.value);
+    setInputError(false);
+    setErrorMessage(false);
   };
 
   const cardVariants = {
@@ -92,13 +119,17 @@ function CustomCard() {
         <motion.input
           animate={{
             rotate: inputError ? [11, -11, 0] : null,
-            color: inputError && inputValue ? "red" : null,
+            scale: inputError ? [1.2, 1, 1] : null,
           }}
-          transition={{ type: "spting", damping: 20, stiffness: 140 }}
+          transition={{ type: "spting", damping: 20, stiffness: 540 }}
           value={inputValue}
           onChange={handleInputOnChange}
           className="input"
           type="text"
+          style={{
+            // color: inputError && inputValue ? "red" : null,
+            borderColor: inputError && inputValue ? "red" : null,
+          }}
           placeholder="Search 
                 for a city..."
         />
@@ -116,6 +147,21 @@ function CustomCard() {
           <SearchIcon />
         </motion.span>
       </div>
+
+      {errorMessage && (
+        <motion.p
+          initial={{ y: -50, opacity: 0 }}
+          animate={{
+            // rotate: inputError ? [11, -11, 0] : null,
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{ type: "spting", damping: 20, stiffness: 540 }}
+          className="errorMessage"
+        >
+          City not found. Please try again.
+        </motion.p>
+      )}
 
       {/* Body and Footer: Initially hidden, shown on button click */}
       {isExpanded && (
